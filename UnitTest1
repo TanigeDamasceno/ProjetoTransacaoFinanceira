@@ -1,0 +1,60 @@
+using NUnit.Framework;
+using Moq;
+
+namespace TransacaoFinanceira.Tests
+{
+    public class ExecutorTransacaoTests
+    {
+        private Mock<IRepositorioContas> _repositorioMock;
+        private ExecutorTransacao _executor;
+
+        [SetUp]
+        public void Setup()
+        {
+            _repositorioMock = new Mock<IRepositorioContas>();
+            _executor = new ExecutorTransacao(_repositorioMock.Object);
+        }
+
+        [Test]
+        public void Test_Transferir_Success()
+        {
+            var contaOrigem = new Conta(1, 200);
+            var contaDestino = new Conta(2, 100);
+            _repositorioMock.Setup(r => r.GetConta(1)).Returns(contaOrigem);
+            _repositorioMock.Setup(r => r.GetConta(2)).Returns(contaDestino);
+
+            var transacao = new Transacao(1, DateTime.Now.ToString(), 1, 2, 50);
+            _executor.Transferir(transacao);
+
+            Assert.That(contaOrigem.Saldo, Is.EqualTo(150));
+            Assert.That(contaDestino.Saldo, Is.EqualTo(150));
+            _repositorioMock.Verify(r => r.AtualizarConta(It.IsAny<Conta>()), Times.Exactly(2));
+        }
+
+        [Test]
+        public void Test_Transferir_Failure_ContaNaoEncontrada()
+        {
+            _repositorioMock.Setup(r => r.GetConta(It.IsAny<long>())).Returns((Conta?)null); 
+
+            var transacao = new Transacao(1, DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss"), 1, 2, 50);
+            _executor.Transferir(transacao);
+
+        }
+
+        [Test]
+        public void Test_Transferir_Failure_SaldoInsuficiente()
+        {
+            var contaOrigem = new Conta(1, 30);
+            var contaDestino = new Conta(2, 100);
+            _repositorioMock.Setup(r => r.GetConta(1)).Returns(contaOrigem);
+            _repositorioMock.Setup(r => r.GetConta(2)).Returns(contaDestino);
+
+            var transacao = new Transacao(1, DateTime.Now.ToString(), 1, 2, 50);
+            _executor.Transferir(transacao);
+
+            Assert.That(contaOrigem.Saldo, Is.EqualTo(30));
+            Assert.That(contaDestino.Saldo, Is.EqualTo(100));
+            _repositorioMock.Verify(r => r.AtualizarConta(It.IsAny<Conta>()), Times.Never);
+        }
+    }
+}
