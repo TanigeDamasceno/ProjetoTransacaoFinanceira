@@ -1,4 +1,4 @@
-# ProjetoTransacaoFinanceira
+# Projeto Transacao Financeira
 Transações Financeiras
 
 Este projeto é uma aplicação em C# que simula 8 transações financeiras entre diferentes contas bancárias. 
@@ -34,7 +34,8 @@ Como Executar
     Execute os testes unitários para garantir a integridade do código.
 
 Testes Unitários
-    Este projeto inclui uma suíte de testes unitários para verificar o correto funcionamento do sistema de transações financeiras. Os testes foram desenvolvidos utilizando NUnit e Moq para garantir a cobertura de diferentes cenários no processo de transferência de valores entre contas bancárias.
+    Este projeto inclui testes unitários para verificar o correto funcionamento do sistema de transações financeiras. Os testes foram desenvolvidos utilizando NUnit e Moq para garantir a cobertura de diferentes cenários no processo de transferência de valores entre contas bancárias.
+    
 Estrutura dos Testes
     Os testes estão organizados na classe ExecutorTransacaoTests, que valida o comportamento da classe ExecutorTransacao, responsável por realizar as transferências.
 
