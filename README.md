@@ -5,7 +5,7 @@ Este projeto é uma aplicação em C# que simula 8 transações financeiras entr
 
 Objetivo
 
-O principal objetivo deste projeto é corrigir um sistema de transferências de valores entre contas bancárias, garantindo que apenas transações válidas sejam executadas, ou seja, que as contas de origem tenham saldo suficiente e que ambas as contas existam no sistema.
+    O principal objetivo deste projeto é corrigir um sistema de transferências de valores entre contas bancárias, garantindo que apenas transações válidas sejam executadas, ou seja, que as contas de origem tenham saldo suficiente e que ambas as contas existam no sistema.
 
 Funcionalidades
 
@@ -47,6 +47,7 @@ Estrutura dos Testes
 
 
 Tecnologias Utilizadas
+
     NUnit
-    Moq
+    Moq.
     
