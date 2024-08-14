@@ -43,6 +43,3 @@ Tecnologias Utilizadas
     NUnit
     Moq
     
-Conclusão
-
-Este projeto demonstra a capacidade de aplicar princípios de design de software, como SOLID, em um contexto prático. Além disso, mostra a importância de testar o código para garantir a robustez e confiabilidade da aplicação.
